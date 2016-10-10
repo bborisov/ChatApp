@@ -1,0 +1,300 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+$great-blue: #3b5998;
+.panel-primary {
+    width: 35%;
+    margin: auto;
+    margin-top: 30%;
+    min-width: 350px;
+    .panel-heading {
+        text-align: center;
+        color: #fff;
+        background-color: $great-blue;
+        border-color: $great-blue;
+    }
+    .input-group {
+        width: 70%;
+        margin-top: 5%;
+        margin-left: 2%;
+        display: inline-table;
+    }
+    #login-button {
+        margin-top: 5%;
+        margin-right: 2%;
+        float: right;
+    }
+    #sign-up {
+        margin-top: 5%;
+        margin-bottom: 3%;
+        display: block;
+        text-align: center;
+    }
+}
+
+.col-xs-2 {
+    height: 100vh;
+    background: $great-blue;
+    text-align: center;
+}
+
+.col-xs-8 {
+    height: 100vh;
+}
+
+.title {
+    font-size: 20px;
+    line-height: 50px;
+    color: white;
+}
+
+.title > ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    > li {
+        width: 50%;
+        position: relative;
+    }
+    > li:nth-child(2) {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    > li:hover {
+        cursor: pointer;
+    }
+    .active {
+        color: $great-blue;
+        background: white;
+    }
+    .inactive:hover {
+        background: rgba(0, 35, 100, 0.5);
+    }
+}
+
+.list {
+    height: 55.5vh;
+    color: white;
+    border-top: thin solid;
+    border-bottom: thin solid;
+    overflow-y: auto;
+    .empty-list {
+        margin-top: 5vh;
+    }
+}
+
+.chat {
+    text-align: left;
+    display: block;
+    text-decoration: none;
+    padding: 5px 15px;
+}
+
+.chat:hover {
+    background: rgba(0, 35, 100, 0.5);
+    cursor: pointer;
+}
+
+.invitation {
+    font-size: 12px;
+    text-align: left;
+    display: block;
+    text-decoration: none;
+    padding: 5px 15px;
+    .inv-row {
+        position: relative;
+        .inv-chat-name,
+        .inv-status {
+            line-height: 17px;
+        }
+        .inv-status {
+            position: absolute;
+            left: 30%;
+            top: 0;
+        }
+        .inv-buttons {
+            color: #333333;
+            position: absolute;
+            right: 0;
+            top: 0;
+            line-height: 11.5px;
+        }
+    }
+}
+
+.member {
+    font-size: 12px;
+    text-align: left;
+    display: block;
+    text-decoration: none;
+    padding: 5px 15px;
+    .member-row {
+        position: relative;
+        .member-name {
+            line-height: 17px;
+        }
+        #dropdown {
+            position: absolute;
+            top: 0;
+            right: 0;
+            #dropdown-button {
+                line-height: 0px;
+                background: white;
+                color: $great-blue;
+                outline: none;
+            }
+            > ul {
+                min-width: 0px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+            > ul > li {
+                color: $great-blue;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            > ul > li:hover {
+                background: $great-blue;
+                color: white;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.collapser {
+    width: 100%;
+    color: white;
+    background: $great-blue;
+    line-height: 30px;
+}
+
+.collapser:hover {
+    color: white;
+    background: rgba(0, 35, 100, 0.5);
+}
+
+.chat-header {
+    min-height: 10vh;
+    color: $great-blue;
+    #chat-pic {
+        height: 10vh;
+        position: relative;
+    }
+    .chat-name {
+        position: absolute;
+        top: 2vh;
+        left: 10vw;
+        width: 40vw;
+        overflow-wrap: break-word;
+        font-size: 25px;
+    }
+    .chat-type {
+        position: absolute;
+        top: 2vh;
+        left: 53.5vw;
+        /* line-height: 35px; */
+    }
+    .chat-summary {
+        position: absolute;
+        top: 6vh;
+        left: 10vw;
+        width: 40vw;
+        overflow-wrap: break-word;
+    }
+    .chat-participants {
+        position: absolute;
+        top: 6vh;
+        left: 53.5vw;
+    }
+    #join-button {
+        position: absolute;
+        top: 4.5vh;
+        left: 53.2vw;
+    }
+}
+
+.chat-messages {
+    height: 80vh;
+    overflow-y: auto;
+    .message {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        &:last-child {
+            border-bottom: 0;
+        }
+        .date {
+            color: $great-blue;
+            text-align: center;
+            font-size: 18px;
+            padding: 40px 10px 5px 10px;
+            border-bottom: 2px solid $great-blue;
+        }
+        &:first-child .date {
+            padding-top: 0;
+        }
+        .message-title {
+            position: relative;
+        }
+        .message-sender {
+            color: $great-blue;
+            font-size: 20px;
+            line-height: 30px;
+        }
+        .editted {
+            position: absolute;
+            top: 0;
+            right: 100px;
+            line-height: 30px;
+        }
+        #edit-button {
+            position: absolute;
+            top: 0;
+            right: 40px;
+            margin-top: 3.5px;
+        }
+        .message-send-time {
+            position: absolute;
+            right: 0;
+            top: 0;
+            line-height: 30px;
+        }
+        .message-content {
+            padding: 2px 10px 2px 10px;
+            overflow-wrap: break-word;
+        }
+        .your-message-style {
+            background: rgb(220, 230, 255);
+            border-radius: 5px;
+        }
+    }
+}
+
+#your-message {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+    outline: none;
+    border-bottom-color: $great-blue;
+}
+
+#your-message:focus {
+    border-top-color: $great-blue;
+}
+
+#your-message::-webkit-resizer {
+    display: none;
+}
+
+.form-group {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 15px;
+    button.btn.btn-primary {
+        color: $great-blue;
+        background: white;
+    }
+}

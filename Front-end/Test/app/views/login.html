@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Login</h3>
+        </div>
+        <form>
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">E-mail</span>
+                <input type="text" class="form-control" aria-describedby="sizing-addon2" ng-keyup="$event.keyCode == 13 && signIn()" ng-model="email">
+            </div>
+            <button type="submit" id="login-button" class="btn btn-default" ng-click="signIn()">Submit</button>
+            <a href="/#/sign-up" id="sign-up">You don't have account? Sign up!</a>
+        </form>
+    </div>
+</div>

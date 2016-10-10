@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-2">
+            <div class="row">
+                <!-- menu -->
+                <div class="title">
+                    <ul ng-init="selectedTab = 'chats'">
+                        <li ng-class="(selectedTab === 'chats') ? 'active':'inactive'" ng-click="selectedTab = 'chats'">Chats</li>
+                        <li ng-class="(selectedTab === 'invitations') ? 'active':'inactive'" ng-click="selectedTab = 'invitations'">Invits</li>
+                    </ul>
+                </div>
+                <!-- list of chats -->
+                <div class="list" ng-show="(selectedTab === 'chats')">
+                    <div class="chat" ng-repeat="chat in chats track by $index" ng-click="selectChat(chat.id)">
+                        {{::chat.name}}
+                    </div>
+                    <div class="empty-list" ng-show="isObjectEmpty(chats)">There are no available chats for you. Try to create one!</div>
+                </div>
+                <!-- list of invitation -->
+                <div class="list" ng-show="(selectedTab === 'invitations')">
+                    <div class="invitation" ng-repeat="invitation in invitations track by $index">
+                        <div class="inv-row">
+                            <div class="inv-chat-name">{{getInvitationChatName(invitation.chatId)}}</div>
+                            <div class="inv-status">{{getInvitationStatus(invitation.statusId)}}</div>
+                            <div class="inv-buttons" id="inv-buttons" ng-show="!(invitation.statusId-1)">
+                                <button type="submit" ng-click="acceptInvitation(invitation.userId, invitation.chatId, invitation.id)">accept</button>
+                                <button type="submit" ng-click="declineInvitation(invitation.userId, invitation.chatId, invitation.id)">decline</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="empty-list" ng-show="isObjectEmpty(invitations)">You have no invitations!</div>
+                </div>
+                <!-- collapse for chat creation -->
+                <div class="collapser" data-toggle="collapse" data-target="#create-chat" ng-init="collapsed = true" ng-click="collapsed = !collapsed">
+                    <span class="glyphicon" ng-class="collapsed ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up'"></span>
+                </div>
+                <!-- chat creation -->
+                <div class="collapse" id="create-chat">
+                    <div class="title">Create chat</div>
+                    <form name="createChatForm" ng-submit="createChat()" novalidate>
+                        <div class="form-group" ng-class="{ 'has-error' : createChatForm.name.$invalid && !createChatForm.name.$pristine }">
+                            <input type="text" name="name" class="form-control" placeholder="Name" ng-model="name" required>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : createChatForm.summary.$invalid && !createChatForm.summary.$pristine }">
+                            <input type="text" name="summary" class="form-control" placeholder="Summary" ng-model="summary" required>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : createChatForm.type.$invalid && !createChatForm.type.$pristine }">
+                            <select name="type" class="form-control" ng-model="typeId" required>
+                                <option value="" disabled selected></option>
+                                <option ng-repeat="(key,val) in chatTypes" value="{{val}}">{{key | lowercase}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" ng-disabled="createChatForm.$invalid">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div ui-view></div>
+    </div>
+</div>
