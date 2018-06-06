@@ -10,3 +10,10 @@ target/
 .classpath
 .project
 .settings
+
+node_modules/
+dist/
+.tmp/
+.sass-cache/
+bower_components/
+package.json
