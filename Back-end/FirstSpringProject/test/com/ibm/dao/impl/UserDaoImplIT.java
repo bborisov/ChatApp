@@ -29,7 +29,7 @@ public class UserDaoImplIT {
 
 	@Before
 	public void setUp() throws Exception {
-		userId = userDao.createUser("pffff", TestConstants.NON_EXISTING_EMAIL, UserStatus.ACTIVE).getId();
+		userId = userDao.createUser("pffff", TestConstants.NON_EXISTING_EMAIL, null, null, UserStatus.ACTIVE).getId();
 	}
 
 	@Test

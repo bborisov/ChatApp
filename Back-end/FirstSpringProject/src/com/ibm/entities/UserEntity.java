@@ -24,9 +24,13 @@ public class UserEntity extends User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
+	private String name;
+
 	private String email;
 
-	private String name;
+	private String password;
+
+	private String salt;
 
 	@Column(name = "status_id")
 	private int statusId;
@@ -54,12 +58,15 @@ public class UserEntity extends User implements Serializable {
 	public UserEntity() {
 	}
 
-	public UserEntity(int id, String email, String name, int statusId, List<InvitationEntity> invitations1,
-			List<InvitationEntity> invitations2, List<MembershipEntity> memberships, List<MessageEntity> messages) {
+	public UserEntity(int id, String name, String email, String password, String salt, int statusId,
+			List<InvitationEntity> invitations1, List<InvitationEntity> invitations2,
+			List<MembershipEntity> memberships, List<MessageEntity> messages) {
 		super();
 		this.id = id;
-		this.email = email;
 		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.salt = salt;
 		this.statusId = statusId;
 		this.invitations1 = invitations1;
 		this.invitations2 = invitations2;
@@ -67,10 +74,12 @@ public class UserEntity extends User implements Serializable {
 		this.messages = messages;
 	}
 
-	public UserEntity(String email, String name, int statusId) {
+	public UserEntity(String name, String email, String password, String salt, int statusId) {
 		super();
-		this.email = email;
 		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.salt = salt;
 		this.statusId = statusId;
 	}
 
@@ -86,6 +95,14 @@ public class UserEntity extends User implements Serializable {
 		this.id = id;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getEmail() {
 		return this.email;
 	}
@@ -94,12 +111,20 @@ public class UserEntity extends User implements Serializable {
 		this.email = email;
 	}
 
-	public String getName() {
-		return this.name;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	public int getStatusId() {

@@ -46,11 +46,12 @@ public class InvitationController {
 			messagingTemplate.convertAndSendToUser(principal.getName(),
 					"/queue/chats/" + invitationCreateDto.getChatId() + "/inviteToChat", flag);
 			if (flag == true) {
-				messagingTemplate.convertAndSend("/topic/users/"
-						+ userDao.getUserByEmail(invitationCreateDto.getEmail()).getId() + "/newChatForInvitation",
-						chatDao.getEntityById(invitationCreateDto.getChatId()));
 				messagingTemplate.convertAndSend(
-						"/topic/users/" + userDao.getUserByEmail(invitationCreateDto.getEmail()).getId() + "/newInvitation",
+						"/topic/users/" + ((User) userDao.getUserByEmail(invitationCreateDto.getEmail())).getId()
+								+ "/newChatForInvitation",
+						chatDao.getEntityById(invitationCreateDto.getChatId()));
+				messagingTemplate.convertAndSend("/topic/users/"
+						+ ((User) userDao.getUserByEmail(invitationCreateDto.getEmail())).getId() + "/newInvitation",
 						(invitation == null) ? false : invitation);
 			}
 		}

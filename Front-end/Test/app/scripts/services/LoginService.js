@@ -7,10 +7,10 @@ angular.module('testApp')
             signIn: signIn
         });
 
-        function signIn(email, callback) {
+        function signIn(email, password, callback) {
 
             var signInSubscription = BackendConnectionService.subscribe("/user/queue/users/login", subscribeCallbackSignIn);
-            BackendConnectionService.send("/login", email);
+            BackendConnectionService.send("/login", { "email": email, "password": password });
 
             function subscribeCallbackSignIn(data) {
                 if (data) {
@@ -20,7 +20,7 @@ angular.module('testApp')
                     UserIdentityFactory.user.statusId = data.statusId;
                     callback();
                 } else {
-                    alert("Incorrect e-mail!");
+                    alert("Invalid credentials!");
                 }
 
                 signInSubscription.unsubscribe();

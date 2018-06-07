@@ -50,7 +50,7 @@ public class InvitationServiceImpl implements InvitationService {
 		if (user == null) {
 			user = (User) new UserEntity();
 			user.setEmail(email);
-			user = userDao.createUser(null, email, UserStatus.INACTIVE);
+			user = userDao.createUser(null, email, null, null, UserStatus.INACTIVE);
 		}
 
 		int userId = user.getId();

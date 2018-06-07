@@ -1,10 +1,10 @@
 *** Back-end ***
-1. Deploy on Tomcat server - version 8.0.47 fits best.
+1. Deploy on Tomcat server - originally version 8.0.47.
 
 Note: There are two other versions of the backend - JDBC and Hibernate Criteria API.
 They exist for reference to previous state of DB collaboration as their names point.
 No tests are covered inside and may differ from final version in terms of functionalities.
-Latest version use Hibernate Query Language.
+Latest version use Hibernate Query Language and Hibernate Criteria API.
 
 
 

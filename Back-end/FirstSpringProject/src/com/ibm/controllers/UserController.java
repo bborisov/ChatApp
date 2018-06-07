@@ -9,6 +9,7 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibm.dto.UserCreateDto;
+import com.ibm.dto.UserLoginDto;
 import com.ibm.entities.wrappers.User;
 import com.ibm.services.UserService;
 
@@ -33,10 +34,10 @@ public class UserController {
 	}
 
 	@MessageMapping(value = "/login")
-	public void login(String email, Principal principal) throws IOException {
+	public void login(UserLoginDto userLoginDto, Principal principal) throws IOException {
 		User user = null;
 		try {
-			user = userService.login(email);
+			user = userService.login(userLoginDto);
 		} finally {
 			messagingTemplate.convertAndSendToUser(principal.getName(), "/queue/users/login",
 					(user == null) ? false : user);

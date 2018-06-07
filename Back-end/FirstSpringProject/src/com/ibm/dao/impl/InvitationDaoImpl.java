@@ -3,7 +3,6 @@ package com.ibm.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -29,15 +28,10 @@ public class InvitationDaoImpl extends BasicDaoImpl<InvitationEntity> implements
 	public void updateInvitationStatus(int invitationId, int statusId) {
 		Session session = sessionFactory.getCurrentSession();
 
-		Query query = session.createQuery("update InvitationEntity set statusId = :statusId where id = :invitationId");
-		query.setParameter("statusId", statusId);
-		query.setParameter("invitationId", invitationId);
+		Criteria criteria = session.createCriteria(InvitationEntity.class);
+		InvitationEntity invitationEntity = (InvitationEntity) criteria.add(Restrictions.eq("id", invitationId)).uniqueResult();
 		
-		int rowsAffected = query.executeUpdate();
-		
-		if (rowsAffected != 1) {
-			throw new RuntimeException("DB inconsistency");
-		}
+		invitationEntity.setStatusId(statusId);
 	}
 
 	@Override

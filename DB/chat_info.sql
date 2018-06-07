@@ -11,6 +11,8 @@ create table user(
 id int auto_increment primary key,
 name varchar(50),
 email varchar(50) unique not null,
+password varchar(64),
+salt varchar(28),
 status_id int not null,
 constraint foreign key(status_id) references user_status(id)
 );
@@ -116,10 +118,11 @@ insert into invitation_status(description) values
 ('accepted'),
 ('declined');
 
-insert into user(name, email, status_id) values
-('ivan', 'ivancho@abv.bg', 1),
-('todor', 'todo@abv.bg', 1),
-('lenko', 'lenochko@abv.bg', 1);
+insert into user(name, email, password, salt, status_id) values
+('ivan', 'ivancho@abv.bg', 'USJZQ0Q/Oor85z7ujKC089aIDu7WiGdDtzYKjTmiOKm/ir94LVdHWJU+sTsVI8GY', 'sSTxL2LRsGNwqYoHdZtQJZFaRx8=', 1),
+('todor', 'todo@abv.bg', 'USJZQ0Q/Oor85z7ujKC089aIDu7WiGdDtzYKjTmiOKm/ir94LVdHWJU+sTsVI8GY', 'sSTxL2LRsGNwqYoHdZtQJZFaRx8=', 1),
+('lenko', 'lenochko@abv.bg', 'Fd57b/vwHIfeh0rMMEfhUrf3hnynHhzttB9HLPMpoYsbfmXnM1qO8WDmigwkrTVS', 'xxGKNIKXnSq/C/GjYlAF3WxiZsM=', 1);
+-- 1-2: a123456 3: 123a321
 
 insert into chat_room(name, summary, type_id, creator_id, create_tms, update_tms) values
 ('Ski', 'a lot of ski', 1, 1, now(), now()),

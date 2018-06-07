@@ -14,8 +14,8 @@ import com.ibm.entities.wrappers.User;
 public class UserDaoImpl extends BasicDaoImpl<UserEntity> implements UserDao {
 
 	@Override
-	public User createUser(String userName, String email, int statusId) {
-		UserEntity userEntity = new UserEntity(email, userName, statusId);
+	public User createUser(String userName, String email, String password, String salt, int statusId) {
+		UserEntity userEntity = new UserEntity(userName, email, password, salt, statusId);
 
 		Session session = sessionFactory.getCurrentSession();
 		session.persist(userEntity);
@@ -24,13 +24,13 @@ public class UserDaoImpl extends BasicDaoImpl<UserEntity> implements UserDao {
 	}
 
 	@Override
-	public User getUserByEmail(String email) {
+	public UserEntity getUserByEmail(String email) {
 		Session session = sessionFactory.getCurrentSession();
 
 		Criteria criteria = session.createCriteria(UserEntity.class);
 		UserEntity userEntity = (UserEntity) criteria.add(Restrictions.eq("email", email)).uniqueResult();
 
-		return (User) userEntity;
+		return userEntity;
 	}
 
 	@Override
@@ -39,6 +39,11 @@ public class UserDaoImpl extends BasicDaoImpl<UserEntity> implements UserDao {
 
 		Criteria criteria = session.createCriteria(UserEntity.class);
 		List<User> listOfUsers = (List<User>) criteria.list();
+		
+		for (User user : listOfUsers) {
+			((UserEntity) user).setPassword(null);
+			((UserEntity) user).setSalt(null);
+		}
 
 		// example
 		// List<User> listOfUsers = listOfUserEntities.stream().map(u ->

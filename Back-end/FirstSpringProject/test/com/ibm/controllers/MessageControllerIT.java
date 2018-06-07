@@ -68,7 +68,8 @@ public class MessageControllerIT {
 		brokerChannelInterceptor = new TestChannelInterceptor();
 		brokerChannel.addInterceptor(brokerChannelInterceptor);
 
-		userId = userDao.createUser(TestConstants.STRING, TestConstants.NON_EXISTING_EMAIL, UserStatus.ACTIVE).getId();
+		userId = userDao.createUser(TestConstants.STRING, TestConstants.NON_EXISTING_EMAIL, TestConstants.STRING,
+				TestConstants.STRING, UserStatus.ACTIVE).getId();
 		chatId = chatDao.createChat(TestConstants.STRING, TestConstants.STRING, ChatType.PRIVATE, userId).getId();
 		chatDao.joinChat(userId, chatId);
 		messageId = messageDao.sendMessage(userId, chatId, TestConstants.STRING).getId();

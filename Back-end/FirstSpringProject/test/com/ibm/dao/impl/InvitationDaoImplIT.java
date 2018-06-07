@@ -41,12 +41,12 @@ public class InvitationDaoImplIT {
 
 	@Before
 	public void setUp() throws Exception {
-		int userId = userDao.createUser(TestConstants.STRING, TestConstants.NON_EXISTING_EMAIL, UserStatus.ACTIVE)
-				.getId();
+		int userId = userDao.createUser(TestConstants.STRING, TestConstants.NON_EXISTING_EMAIL, TestConstants.STRING,
+				TestConstants.STRING, UserStatus.ACTIVE).getId();
 		int chatId = chatDao.createChat(TestConstants.STRING, TestConstants.STRING, ChatType.PRIVATE, userId).getId();
 		chatDao.joinChat(userId, chatId);
-		anotherUserId = userDao
-				.createUser(TestConstants.STRING, TestConstants.ANOTHER_NON_EXISTING_EMAIL, UserStatus.ACTIVE).getId();
+		anotherUserId = userDao.createUser(TestConstants.STRING, TestConstants.ANOTHER_NON_EXISTING_EMAIL,
+				TestConstants.STRING, TestConstants.STRING, UserStatus.ACTIVE).getId();
 		invitationId = invitationDao.inviteToChat(anotherUserId, chatId, userId).getId();
 	}
 

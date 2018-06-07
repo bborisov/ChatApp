@@ -15,15 +15,17 @@ $great-blue: #3b5998;
         border-color: $great-blue;
     }
     .input-group {
-        width: 70%;
+        width: 96%;
         margin-top: 5%;
         margin-left: 2%;
+        margin-right: 2%;
         display: inline-table;
     }
     #login-button {
+        width: 20%;
         margin-top: 5%;
-        margin-right: 2%;
-        float: right;
+        margin-left: 40%;
+        margin-right: 40%;
     }
     #sign-up {
         margin-top: 5%;

@@ -3,12 +3,16 @@
         <div class="panel-heading">
             <h3 class="panel-title">Login</h3>
         </div>
-        <form>
-            <div class="input-group">
+        <form name="loginForm" ng-submit="signIn()" novalidate>
+            <div class="input-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
                 <span class="input-group-addon" id="sizing-addon2">E-mail</span>
-                <input type="text" class="form-control" aria-describedby="sizing-addon2" ng-keyup="$event.keyCode == 13 && signIn()" ng-model="email">
+                <input type="text" class="form-control" aria-describedby="sizing-addon2" ng-model="email" required>
             </div>
-            <button type="submit" id="login-button" class="btn btn-default" ng-click="signIn()">Submit</button>
+            <div class="input-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+                <span class="input-group-addon" id="sizing-addon2">Password</span>
+                <input type="password" class="form-control" aria-describedby="sizing-addon2" ng-model="password" required>
+            </div>
+            <button type="submit" id="login-button" class="btn btn-default" ng-disabled="loginForm.$invalid">Submit</button>
             <a href="/#/sign-up" id="sign-up">You don't have account? Sign up!</a>
         </form>
     </div>

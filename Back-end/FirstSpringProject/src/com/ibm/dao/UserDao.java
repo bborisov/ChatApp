@@ -7,9 +7,9 @@ import com.ibm.entities.wrappers.User;
 
 public interface UserDao extends BasicDao<UserEntity> {
 
-	public User createUser(String userName, String email, int statusId);
+	public User createUser(String userName, String email, String password, String salt, int statusId);
 
-	public User getUserByEmail(String email);
+	public UserEntity getUserByEmail(String email);
 
 	public List<User> getAllUsers();
 
