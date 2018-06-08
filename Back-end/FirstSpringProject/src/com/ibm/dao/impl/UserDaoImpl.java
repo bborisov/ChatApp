@@ -24,13 +24,13 @@ public class UserDaoImpl extends BasicDaoImpl<UserEntity> implements UserDao {
 	}
 
 	@Override
-	public UserEntity getUserByEmail(String email) {
+	public User getUserByEmail(String email) {
 		Session session = sessionFactory.getCurrentSession();
 
 		Criteria criteria = session.createCriteria(UserEntity.class);
 		UserEntity userEntity = (UserEntity) criteria.add(Restrictions.eq("email", email)).uniqueResult();
 
-		return userEntity;
+		return (User) userEntity;
 	}
 
 	@Override
@@ -39,10 +39,10 @@ public class UserDaoImpl extends BasicDaoImpl<UserEntity> implements UserDao {
 
 		Criteria criteria = session.createCriteria(UserEntity.class);
 		List<User> listOfUsers = (List<User>) criteria.list();
-		
+
 		for (User user : listOfUsers) {
-			((UserEntity) user).setPassword(null);
-			((UserEntity) user).setSalt(null);
+			user.setPassword(null);
+			user.setSalt(null);
 		}
 
 		// example

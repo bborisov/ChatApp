@@ -9,7 +9,7 @@ public interface UserDao extends BasicDao<UserEntity> {
 
 	public User createUser(String userName, String email, String password, String salt, int statusId);
 
-	public UserEntity getUserByEmail(String email);
+	public User getUserByEmail(String email);
 
 	public List<User> getAllUsers();
 

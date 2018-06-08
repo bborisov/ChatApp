@@ -12,6 +12,8 @@ public class TestConstants {
 	public static final String ANOTHER_NON_EXISTING_EMAIL = "anotherNonExistingEmail@abv.bg";
 
 	public static final String PASSWORD = "a12345";
+	public static final String INVALID_PASSWORD = "pass";
+	public static final String ANOTHER_PASSWORD = "anotherPass1";
 
 	public static final String WEBSOCKET_URI = "http://localhost:8080/FirstSpringProject/ws";
 	public static final String WEBSOCKET_APP = "/app";

@@ -14,6 +14,14 @@ public abstract class User {
 
 	public abstract void setEmail(String email);
 
+	public abstract String getPassword();
+
+	public abstract void setPassword(String password);
+
+	public abstract String getSalt();
+
+	public abstract void setSalt(String salt);
+
 	public abstract int getStatusId();
 
 	public abstract void setStatusId(int statusId);

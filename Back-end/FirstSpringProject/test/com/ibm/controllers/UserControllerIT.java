@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.security.Principal;
+import java.util.Base64;
 import java.util.NoSuchElementException;
 
 import org.junit.Before;
@@ -19,12 +20,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ibm.activities.HashActivity;
 import com.ibm.config.AppConfig;
 import com.ibm.config.UserPrincipal;
 import com.ibm.constants.TestConstants;
 import com.ibm.constants.UserStatus;
 import com.ibm.dao.UserDao;
 import com.ibm.dto.UserCreateDto;
+import com.ibm.dto.UserLoginDto;
 import com.ibm.entities.wrappers.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -59,6 +62,7 @@ public class UserControllerIT {
 		UserCreateDto userCreateDto = new UserCreateDto();
 		userCreateDto.setName(TestConstants.STRING);
 		userCreateDto.setEmail(TestConstants.NON_EXISTING_EMAIL);
+		userCreateDto.setPassword(TestConstants.PASSWORD);
 
 		userController.createUser(userCreateDto, principal);
 
@@ -92,7 +96,8 @@ public class UserControllerIT {
 
 	@Test(expected = UnsupportedOperationException.class)
 	public void testCreateUserExistingEmail() throws IOException {
-		userDao.createUser(TestConstants.STRING, TestConstants.NON_EXISTING_EMAIL, UserStatus.ACTIVE);
+		userDao.createUser(TestConstants.STRING, TestConstants.NON_EXISTING_EMAIL, TestConstants.STRING,
+				TestConstants.STRING, UserStatus.ACTIVE);
 
 		UserCreateDto userCreateDto = new UserCreateDto();
 		userCreateDto.setName(TestConstants.STRING);
@@ -103,9 +108,18 @@ public class UserControllerIT {
 
 	@Test
 	public void testLogin() throws IOException, InterruptedException {
-		userDao.createUser(TestConstants.STRING, TestConstants.NON_EXISTING_EMAIL, UserStatus.ACTIVE);
+		byte[] salt = HashActivity.getRandomSalt();
+		byte[] passwordHash = HashActivity.hashPassword(TestConstants.PASSWORD, salt);
 
-		userController.login(TestConstants.NON_EXISTING_EMAIL, principal);
+		userDao.createUser(TestConstants.STRING, TestConstants.NON_EXISTING_EMAIL,
+				Base64.getEncoder().encodeToString(passwordHash), Base64.getEncoder().encodeToString(salt),
+				UserStatus.ACTIVE);
+
+		UserLoginDto userLoginDto = new UserLoginDto();
+		userLoginDto.setEmail(TestConstants.NON_EXISTING_EMAIL);
+		userLoginDto.setPassword(TestConstants.PASSWORD);
+
+		userController.login(userLoginDto, principal);
 
 		brokerChannelInterceptor.setIncludedDestinations("/user/**");
 
@@ -119,17 +133,50 @@ public class UserControllerIT {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testLoginInvalidEmail() throws IOException {
-		userController.login(TestConstants.INVALID_EMAIL, principal);
+		UserLoginDto userLoginDto = new UserLoginDto();
+		userLoginDto.setEmail(TestConstants.INVALID_EMAIL);
+
+		userController.login(userLoginDto, principal);
 	}
 
 	@Test(expected = NoSuchElementException.class)
 	public void testLoginNonExistingEmail() throws IOException {
-		userController.login(TestConstants.NON_EXISTING_EMAIL, principal);
+		UserLoginDto userLoginDto = new UserLoginDto();
+		userLoginDto.setEmail(TestConstants.NON_EXISTING_EMAIL);
+		userLoginDto.setPassword(TestConstants.PASSWORD);
+
+		userController.login(userLoginDto, principal);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testLoginInvalidPassword() throws IOException {
+		UserLoginDto userLoginDto = new UserLoginDto();
+		userLoginDto.setEmail(TestConstants.NON_EXISTING_EMAIL);
+		userLoginDto.setEmail(TestConstants.INVALID_PASSWORD);
+
+		userController.login(userLoginDto, principal);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testLoginPasswordNotMatchTheOneInDb() throws IOException {
+		byte[] salt = HashActivity.getRandomSalt();
+		byte[] passwordHash = HashActivity.hashPassword(TestConstants.PASSWORD, salt);
+
+		userDao.createUser(TestConstants.STRING, TestConstants.NON_EXISTING_EMAIL,
+				Base64.getEncoder().encodeToString(passwordHash), Base64.getEncoder().encodeToString(salt),
+				UserStatus.ACTIVE);
+
+		UserLoginDto userLoginDto = new UserLoginDto();
+		userLoginDto.setEmail(TestConstants.NON_EXISTING_EMAIL);
+		userLoginDto.setPassword(TestConstants.ANOTHER_PASSWORD);
+
+		userController.login(userLoginDto, principal);
 	}
 
 	@Test
 	public void testGetAllUsers() throws IOException, InterruptedException {
-		User user = userDao.createUser(TestConstants.STRING, TestConstants.NON_EXISTING_EMAIL, UserStatus.ACTIVE);
+		User user = userDao.createUser(TestConstants.STRING, TestConstants.NON_EXISTING_EMAIL, TestConstants.STRING,
+				TestConstants.STRING, UserStatus.ACTIVE);
 
 		userController.getAllUsers(principal);
 

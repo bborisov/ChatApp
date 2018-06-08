@@ -13,7 +13,6 @@ import com.ibm.constants.UserStatus;
 import com.ibm.dao.UserDao;
 import com.ibm.dto.UserCreateDto;
 import com.ibm.dto.UserLoginDto;
-import com.ibm.entities.UserEntity;
 import com.ibm.entities.wrappers.User;
 import com.ibm.services.UserService;
 import com.ibm.validators.EmailValidator;
@@ -59,8 +58,11 @@ public class UserServiceImpl implements UserService {
 		String encodedPasswordHash = Base64.getEncoder().encodeToString(passwordHash);
 
 		User user = userDao.createUser(userName, email, encodedPasswordHash, encodedSalt, UserStatus.ACTIVE);
-		((UserEntity) user).setPassword(null);
-		((UserEntity) user).setSalt(null);
+
+		if (user != null) {
+			user.setPassword(null);
+			user.setSalt(null);
+		}
 
 		return user;
 	}
@@ -81,7 +83,7 @@ public class UserServiceImpl implements UserService {
 			throw new IllegalArgumentException("Invalid password - pattern not matched!");
 		}
 
-		UserEntity user = userDao.getUserByEmail(email);
+		User user = userDao.getUserByEmail(email);
 		if (user == null) {
 			throw new NoSuchElementException("There is no user with such an e-mail!");
 		}
@@ -95,7 +97,7 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(null);
 		user.setSalt(null);
 
-		return (User) user;
+		return user;
 	}
 
 	@Override

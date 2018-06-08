@@ -56,7 +56,7 @@ public class InvitationServiceImplTest {
 		UserEntity userEntity = new UserEntity();
 		userEntity.setId(TestConstants.ID);
 
-		Mockito.when(userDao.getUserByEmail(Mockito.anyString())).thenReturn(userEntity);
+		Mockito.when(userDao.getUserByEmail(Mockito.anyString())).thenReturn((User) userEntity);
 
 		invitationServiceImpl.inviteToChat(invitationCreateDto);
 
@@ -77,7 +77,7 @@ public class InvitationServiceImplTest {
 		UserEntity userEntity = new UserEntity();
 		userEntity.setId(TestConstants.ID);
 
-		Mockito.when(userDao.getUserByEmail(Mockito.anyString())).thenReturn(userEntity);
+		Mockito.when(userDao.getUserByEmail(Mockito.anyString())).thenReturn((User) userEntity);
 		Mockito.when(chatService.isInvited(Mockito.anyInt(), Mockito.anyInt())).thenReturn(true);
 
 		invitationServiceImpl.inviteToChat(invitationCreateDto);
@@ -99,7 +99,7 @@ public class InvitationServiceImplTest {
 		UserEntity userEntity = new UserEntity();
 		userEntity.setId(TestConstants.ID);
 
-		Mockito.when(userDao.getUserByEmail(Mockito.anyString())).thenReturn(userEntity);
+		Mockito.when(userDao.getUserByEmail(Mockito.anyString())).thenReturn((User) userEntity);
 		Mockito.when(chatService.isDeclined(Mockito.anyInt(), Mockito.anyInt())).thenReturn(true);
 
 		invitationServiceImpl.inviteToChat(invitationCreateDto);
@@ -155,7 +155,7 @@ public class InvitationServiceImplTest {
 		UserEntity userEntity = new UserEntity();
 		userEntity.setId(TestConstants.ID);
 
-		Mockito.when(userDao.getUserByEmail(Mockito.anyString())).thenReturn(userEntity);
+		Mockito.when(userDao.getUserByEmail(Mockito.anyString())).thenReturn((User) userEntity);
 		Mockito.when(chatService.isMember(Mockito.anyInt(), Mockito.anyInt())).thenReturn(true);
 
 		invitationServiceImpl.inviteToChat(invitationCreateDto);
