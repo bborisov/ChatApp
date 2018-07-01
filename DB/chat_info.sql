@@ -119,37 +119,37 @@ insert into invitation_status(description) values
 ('declined');
 
 insert into user(name, email, password, salt, status_id) values
-('ivan', 'ivancho@abv.bg', 'USJZQ0Q/Oor85z7ujKC089aIDu7WiGdDtzYKjTmiOKm/ir94LVdHWJU+sTsVI8GY', 'sSTxL2LRsGNwqYoHdZtQJZFaRx8=', 1),
-('todor', 'todo@abv.bg', 'USJZQ0Q/Oor85z7ujKC089aIDu7WiGdDtzYKjTmiOKm/ir94LVdHWJU+sTsVI8GY', 'sSTxL2LRsGNwqYoHdZtQJZFaRx8=', 1),
+('ivan', 'ivan@abv.bg', 'USJZQ0Q/Oor85z7ujKC089aIDu7WiGdDtzYKjTmiOKm/ir94LVdHWJU+sTsVI8GY', 'sSTxL2LRsGNwqYoHdZtQJZFaRx8=', 1),
+('todor', 'todor@abv.bg', 'USJZQ0Q/Oor85z7ujKC089aIDu7WiGdDtzYKjTmiOKm/ir94LVdHWJU+sTsVI8GY', 'sSTxL2LRsGNwqYoHdZtQJZFaRx8=', 1),
 ('lenko', 'lenochko@abv.bg', 'Fd57b/vwHIfeh0rMMEfhUrf3hnynHhzttB9HLPMpoYsbfmXnM1qO8WDmigwkrTVS', 'xxGKNIKXnSq/C/GjYlAF3WxiZsM=', 1);
--- 1-2: a123456 3: 123a321
+-- ivan and todor: a123456; lenko: 123a321
 
 insert into chat_room(name, summary, type_id, creator_id, create_tms, update_tms) values
-('Ski', 'a lot of ski', 1, 1, now(), now()),
+('Ski', 'a lot of skiing', 1, 1, now(), now()),
 ('Dance', 'a lot of dancing', 1, 1, now(), now()),
 ('Hiking', 'a lot of hiking', 1, 1, now(), now()),
 ('Running', 'a lot of running', 1, 1, now(), now()),
 ('Gaming', 'a lot of gaming', 1, 1, now(), now()),
-('Smoke weed every day', 'a lot of weed', 1, 1, now(), now()),
+('Golf', 'a lot of golf', 1, 1, now(), now()),
 ('Flying', 'a lot of flying', 1, 1, now(), now()),
-('Shouting', 'a lot of shouting', 1, 1, now(), now()),
+('Music', 'a lot of music', 1, 1, now(), now()),
 ('Rammstein', 'a lot of rammstein', 1, 1, now(), now()),
-('Blabla', 'a lot of blabla', 1, 1, now(), now()),
-('Thinking', 'a lot of thinking', 1, 1, now(), now()),
-('Running', 'a lot of running', 1, 1, now(), now()),
-('Gaming', 'a lot of gaming', 1, 1, now(), now()),
-('Smoke weed every day', 'a lot of weed', 1, 1, now(), now()),
-('Flying', 'a lot of flying', 1, 1, now(), now()),
-('Shouting', 'a lot of shouting', 1, 1, now(), now()),
-('Rammstein', 'a lot of rammstein', 1, 1, now(), now()),
-('Blabla', 'a lot of blabla', 1, 1, now(), now()),
-('Thinking', 'a lot of thinking', 1, 1, now(), now()),
-('Running', 'a lot of running', 1, 1, now(), now()),
-('Gaming', 'a lot of gaming', 1, 1, now(), now()),
-('Smoke weed every day', 'a lot of weed', 1, 1, now(), now()),
-('Flying', 'a lot of flying', 1, 1, now(), now()),
-('Shouting', 'a lot of shouting', 1, 1, now(), now()),
-('Rammstein', 'a lot of rammstein', 1, 1, now(), now());
+('BMW', 'a lot of BMWs', 1, 1, now(), now()),
+('Football', 'a lot of football', 1, 1, now(), now()),
+('Soccer', 'a lot of soccer', 1, 1, now(), now()),
+('Movies', 'a lot of movies', 1, 1, now(), now()),
+('Guitar', 'a lot of guitares', 1, 1, now(), now()),
+('Piano songs', 'a lot of piano songs', 1, 1, now(), now()),
+('Skydiving', 'a lot of skydiving', 1, 1, now(), now()),
+('Swimming', 'a lot of swimming', 1, 1, now(), now()),
+('WWE wrestling', 'a lot of WWE wrestling', 1, 1, now(), now()),
+('Fishing', 'a lot of fishing', 1, 1, now(), now()),
+('Biking', 'a lot of biking', 1, 1, now(), now()),
+('Cars', 'a lot of cars', 1, 1, now(), now()),
+('Wild life', 'a lot of wild life', 1, 1, now(), now()),
+('Nature of Bulgaria', 'wonderful nature of Bulgaria', 1, 1, now(), now()),
+('Poker', 'a lot of poker', 1, 1, now(), now()),
+('Programming', 'Naahh', 1, 1, now(), now());
 
 insert into membership(user_id, chat_room_id, role_id, status_id) values
 (1, 1, 1, 1),
@@ -184,8 +184,10 @@ insert into membership(user_id, chat_room_id, role_id, status_id) values
 (3, 10, 2, 3);
 
 insert into message(sender_id, chat_room_id, content, create_tms, update_tms) values
-(1, 1, 'alabala', now(), now()),
-(2, 1, 'blabla', now(), now());
+(1, 1, 'Hi. So... you like skiing?', now(), now()),
+(2, 1, 'Yeah, this is my favourite sport.', now(), now()),
+(1, 1, 'Cool, let\'s skiing!', now(), now()),
+(2, 1, 'Alright.', now(), now());
 
 insert into invitation(user_id, chat_room_id, invitor_id, status_id) values
 (3, 1, 1, 2),
